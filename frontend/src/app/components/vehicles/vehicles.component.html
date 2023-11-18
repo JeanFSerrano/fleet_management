@@ -1,0 +1,76 @@
+<div class="app_container">
+  <details class="mb-3 mt-3" #details>
+    <summary class="text-light btn btn-success mb-4">Cadastrar/Atualizar Veículo ▼</summary>
+    <form class="text-light"  (ngSubmit)="onSubmit(vehicleForm)" #vehicleForm="ngForm">
+      <div class="d-flex justify-content-between col-sm-8 m-auto">
+        <div class="col-sm-5">
+          <app-text-input class="col-sm-12" for="brand" label="Marca" [(ngModel)]="brand" name="brand"></app-text-input>
+          <app-text-input class="col-sm-12" for="model" label="Modelo" [(ngModel)]="model"
+            name="model"></app-text-input>
+          <app-text-input class="col-sm-12" for="kmDriven" label="KMs rodados" [(ngModel)]="kmDriven"
+            name="kmDriven"></app-text-input>
+          <app-text-input class="col-sm-12" for="normalDoors" label="Portas" [(ngModel)]="normalDoors"
+            name="normalDoors"></app-text-input>
+        </div>
+        <div class="col-sm-5">
+          <app-text-input class="col-sm-12" for="runningDoors" label="Portas de Correr" [(ngModel)]="runningDoors"
+            name="runningDoors"></app-text-input>
+          <app-text-input class="col-sm-12" for="seats" label="Assentos" [(ngModel)]="seats"
+            name="seats"></app-text-input>
+
+          <label for="type"> Selecione o tipo</label>
+          <select name="type" class="form-select" [(ngModel)]="type">
+            <option value="Carro">Carro</option>
+            <option value="Van">Van</option>
+            <option value="Motocicleta">Motocicleta</option>
+          </select>
+
+          <app-text-input class="col-sm-12" for="year" label="Ano" [(ngModel)]="year" name="year"></app-text-input>
+        </div>
+      </div>
+      <div class="d-flex col-sm-4 justify-content-around align-itens-center m-auto mt-3">
+        <input type="submit" value="Adicionar Veículo" class="btn btn-success" (click)="createVehicle()">
+        <input type="submit" value="Atualizar Veículo" class="btn btn-success" (click)="update()">
+      </div>
+    </form>
+  </details>
+
+  <div class="table_container">
+    <table class="table table-striped table-dark">
+      <thead>
+        <tr>
+          <th scope="col" (click)="sortColumn('brand')">Marca &#8645;</th>
+          <th scope="col" (click)="sortColumn('model')">Modelo</th>
+          <th scope="col" (click)="sortColumn(convertStringToInt(kmDriven))">Kms Rodados</th>
+          <th scope="col" (click)="sortColumn(convertStringToInt(normalDoors))">Portas</th>
+          <th scope="col" (click)="sortColumn(convertStringToInt(runningDoors))">Portas de Correr</th>
+          <th scope="col" (click)="sortColumn(convertStringToInt(seats))">Assentos</th>
+          <th scope="col" (click)="sortColumn(type)">Tipo</th>
+          <th scope="col" (click)="sortColumn(convertStringToInt(year))">Ano</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let vehicle of vehicles$ | async">
+          <td hidden>{{vehicle.id}}</td>
+          <td>{{vehicle.brand}}</td>
+          <td>{{vehicle.model}}</td>
+          <td>{{vehicle.kmDriven}}</td>
+          <td>{{vehicle.normalDoors}}</td>
+          <td>{{vehicle.runningDoors}}</td>
+          <td>{{vehicle.seats}}</td>
+          <td>{{vehicle.type}}</td>
+          <td>{{vehicle.year}}</td>
+          <td class="d-flex justify-content-start gap-3">
+            <button type="button" class="btn btn-danger" (click)="delete(vehicle.id)">
+              Deletar
+            </button>
+            <button type="button" class="btn btn-warning" (click)="fillFields(vehicle)">
+              Atualizar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/fleet_management.props" />
+</Project>

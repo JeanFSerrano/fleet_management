@@ -1,0 +1,42 @@
+<div class="app_container">
+  <details class="mb-3 mt-3">
+    <summary class="text-light btn btn-success mb-4">Cadastrar/Atualizar Frota ▼</summary>
+    <form class="text-light">
+      <div class="col-sm-5 d-flex gap-4">
+        <app-text-input class="col-sm-12" for="name" label="Nome" [(ngModel)]="name" name="brand"></app-text-input>
+        <app-text-input class="col-sm-12" for="cnpj" label="CNPJ" [(ngModel)]="cnpj" name="model"></app-text-input>
+      </div>
+      <div class="d-flex col-sm-4 justify-content-around align-itens-center m-auto mt-3">
+        <input type="reset" value="Adicionar Frota" class="btn btn-success" (click)="createFleet()">
+        <input type="reset" value="Atualizar Frota" class="btn btn-success" (click)="update()">
+      </div>
+    </form>
+  </details>
+
+  <div class="table_container">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">CNPJ</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody class="table-group-divider">
+        <tr *ngFor="let fleet of fleets$ | async">
+          <td hidden>{{fleet.id}}</td>
+          <td class="col-sm-2">{{fleet.name}}</td>
+          <td class="col-sm-4">{{fleet.cnpj}}</td>
+          <td class="d-flex justify-content-start gap-3">
+            <button type="button" class="btn btn-danger" (click)="remove(fleet.id)">
+              Deletar
+            </button>
+            <button type="button" class="btn btn-warning" (click)="fillFields(fleet)">
+              Atualizar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

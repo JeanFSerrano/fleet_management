@@ -1,0 +1,4 @@
+<div class="mb-2 col-sm-12">
+    <label [attr.for]="name" class="form-label"> {{label}} </label>
+    <input class="form-control" type="text" [name]="name" [(ngModel)]="value" [readOnly]="!!isReadOnly" />
+</div>
